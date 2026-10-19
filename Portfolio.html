@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfólio | Daniel</title>
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #0a0a0a;
+            color: #f2f2f2;
+            line-height: 1.7;
+        }
+
+        a:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+
+        header {
+            background: #111;
+            border-bottom: 1px solid #2a2a2a;
+            padding: 18px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        header h2 { font-size: 22px; }
+
+        nav { display: flex; gap: 22px; flex-wrap: wrap; }
+
+        nav a { color: #bdbdbd; text-decoration: none; }
+        nav a:hover { color: #fff; text-decoration: underline; text-underline-offset: 6px; }
+
+        .inicio {
+            min-height: 480px;
+            padding: 70px 10%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 45px;
+            border-bottom: 1px solid #2a2a2a;
+        }
+
+        .inicio div { max-width: 560px; }
+
+        .inicio h1 { font-size: 52px; line-height: 1.1; margin-bottom: 12px; }
+
+        .inicio h2 { color: #bdbdbd; font-size: 20px; font-weight: normal; margin-bottom: 20px; }
+
+        .inicio p { margin-bottom: 14px; }
+
+        .inicio img {
+            width: 270px;
+            height: 270px;
+            object-fit: cover;
+            object-position: 55% 40%;
+            border-radius: 50%;
+            border: 3px solid #f2f2f2;
+            filter: grayscale(1) contrast(1.05);
+        }
+
+        .botao {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 11px 22px;
+            background: #f2f2f2;
+            color: #0a0a0a;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .botao:hover { background: #fff; text-decoration: underline; }
+
+        section:not(.inicio) { padding: 65px 10%; }
+
+        section h2 { font-size: 28px; margin-bottom: 20px; }
+
+        #sobre, #contactos { background: #111; }
+
+        #sobre p { max-width: 65ch; margin-bottom: 14px; }
+
+        .interesses { list-style: none; margin-top: 6px; }
+        .interesses li { padding: 4px 0 4px 22px; position: relative; }
+        .interesses li::before { content: "–"; position: absolute; left: 0; color: #888; }
+
+        #formacao { border-top: 1px solid #2a2a2a; }
+        .cv { display: grid; grid-template-columns: repeat(3, 1fr); gap: 36px; }
+        .cv h3 { font-size: 17px; margin-bottom: 10px; padding-bottom: 6px; border-bottom: 1px solid #333; }
+        .cv li small { display: block; color: #a8a8a8; font-size: 14px; }
+        .cv .interesses li { padding-top: 6px; padding-bottom: 6px; }
+        .cv-link { display: inline-block; margin-top: 14px; font-weight: bold; color: #fff; text-underline-offset: 4px; }
+
+        .descricao { margin-bottom: 28px; color: #a8a8a8; max-width: 60ch; }
+
+        .projectos {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+
+        .cartao {
+            background: #111;
+            border: 1px solid #333;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cartao:hover { border-color: #f2f2f2; }
+
+        .imagem {
+            height: 110px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            font-weight: bold;
+            border-bottom: 1px solid #333;
+        }
+
+        .codigo { background: #1c1c1c; color: #fff; }
+        .access { background: #262626; color: #fff; }
+        .excel  { background: #e8e8e8; color: #0a0a0a; }
+        .rede   { background: #3a3a3a; color: #fff; }
+
+        .cartao h3 { padding: 18px 18px 6px; font-size: 18px; }
+
+        .cartao p { padding: 0 18px 12px; color: #b0b0b0; font-size: 14px; }
+
+        .cartao a {
+            margin: auto 18px 20px;
+            color: #fff;
+            font-size: 14px;
+            font-weight: bold;
+            text-underline-offset: 4px;
+        }
+
+        .contacto p { margin: 10px 0; }
+        .contacto a { color: #fff; text-underline-offset: 4px; }
+        .contacto a:hover { text-decoration-thickness: 2px; }
+
+        footer {
+            text-align: center;
+            padding: 28px;
+            background: #050505;
+            border-top: 1px solid #2a2a2a;
+            color: #a0a0a0;
+            font-size: 14px;
+        }
+
+        /* troca de língua sem JavaScript */
+        .opcao { position: absolute; opacity: 0; pointer-events: none; }
+        #pt:checked ~ * .en { display: none; }
+        #en:checked ~ * .pt { display: none; }
+        .lingua { display: flex; gap: 6px; align-items: center; margin-left: auto; }
+        .lingua label { cursor: pointer; padding: 3px 10px; border: 1px solid #444; color: #bdbdbd; font-size: 13px; }
+        .lingua label:hover { border-color: #fff; color: #fff; }
+        #pt:checked ~ header .l-pt, #en:checked ~ header .l-en { background: #f2f2f2; color: #0a0a0a; border-color: #f2f2f2; font-weight: bold; }
+        #pt:focus-visible ~ header .l-pt, #en:focus-visible ~ header .l-en { outline: 3px solid #fff; outline-offset: 3px; }
+
+        @media (max-width: 800px) {
+            .inicio { flex-direction: column-reverse; text-align: center; padding: 50px 7%; }
+            .inicio img { width: 210px; height: 210px; }
+            .inicio h1 { font-size: 38px; }
+            header, nav, .lingua { justify-content: center; margin-left: 0; }
+            section:not(.inicio) { padding: 50px 7%; }
+            .projectos, .cv { grid-template-columns: 1fr; }
+        }
+
+        @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+    </style>
+</head>
+
+<body>
+
+    <input class="opcao" type="radio" name="lingua" id="pt" checked aria-label="Português">
+    <input class="opcao" type="radio" name="lingua" id="en" aria-label="English">
+
+    <header>
+        <h2>Daniel</h2>
+
+        <nav>
+            <a href="#inicio"><span class="pt">Início</span><span class="en">Home</span></a>
+            <a href="#sobre"><span class="pt">Sobre mim</span><span class="en">About me</span></a>
+            <a href="#formacao"><span class="pt">Formação</span><span class="en">Education</span></a>
+            <a href="#projectos"><span class="pt">Projectos</span><span class="en">Projects</span></a>
+            <a href="#contactos"><span class="pt">Contactos</span><span class="en">Contacts</span></a>
+        </nav>
+
+        <div class="lingua">
+            <label for="pt" class="l-pt">PT</label>
+            <label for="en" class="l-en">EN</label>
+        </div>
+    </header>
+
+    <section id="inicio" class="inicio">
+        <div>
+            <h1><span class="pt">Olá, eu sou o Daniel</span><span class="en">Hi, I'm Daniel</span></h1>
+
+            <h2><span class="pt">Estudante de Técnico de Suporte Informático</span><span class="en">IT Support Technician student</span></h2>
+
+            <p>
+                <span class="pt">Gosto de perceber o que se passa por dentro das coisas: o
+                computador que não liga, a rede que não encontra o router, a
+                página que não fica como eu quero.</span><span class="en">I like figuring out what goes on inside things: the computer
+                that won't turn on, the network that can't find the router, the
+                page that won't look the way I want.</span>
+            </p>
+            <p>
+                <span class="pt">Ando a aprender, a errar e a tentar outra vez. Esta página é
+                onde guardo o que vou fazendo.</span><span class="en">I'm learning, making mistakes and trying again. This page is
+                where I keep what I make.</span>
+            </p>
+
+            <a href="#projectos" class="botao"><span class="pt">Ver o que já fiz</span><span class="en">See what I've done</span></a>
+        </div>
+
+        <img src="foto-perfil.png" alt="Fotografia de Daniel">
+    </section>
+
+    <section id="sobre">
+        <h2><span class="pt">Sobre mim</span><span class="en">About me</span></h2>
+
+        <p>
+            <span class="pt">Chamo-me Daniel e estou a estudar para ser técnico de suporte
+            informático. O que mais me prende é a parte prática: abrir,
+            montar, ligar, testar. Aprendo melhor quando tenho um problema
+            à minha frente.</span><span class="en">My name is Daniel and I'm studying to become an IT support
+            technician. What hooks me most is the hands-on side: opening,
+            assembling, connecting, testing. I learn best when I have a
+            problem in front of me.</span>
+        </p>
+
+        <p><span class="pt">O que me interessa neste momento:</span><span class="en">What I'm into right now:</span></p>
+
+        <ul class="interesses">
+            <li><span class="pt">Suporte e manutenção de computadores</span><span class="en">Computer support and maintenance</span></li>
+            <li><span class="pt">Redes de computadores</span><span class="en">Computer networks</span></li>
+            <li><span class="pt">Bases de dados e Excel</span><span class="en">Databases and Excel</span></li>
+            <li><span class="pt">Fazer páginas em HTML e CSS, como esta</span><span class="en">Building pages in HTML and CSS, like this one</span></li>
+        </ul>
+    </section>
+
+    <section id="formacao">
+        <h2><span class="pt">Formação e competências</span><span class="en">Education and skills</span></h2>
+
+        <div class="cv">
+            <div>
+                <h3><span class="pt">Formação</span><span class="en">Education</span></h3>
+                <ul class="interesses">
+                    <li><span class="pt">Curso de Electricidade Industrial</span><span class="en">Industrial Electricity course</span><small>Instituto de Transportes e Comunicações (ITC)</small></li>
+                    <li><span class="pt">1º Ciclo do Ensino Secundário</span><span class="en">Lower secondary school</span><small>Colégio Kitabu</small></li>
+                    <li><span class="pt">Ensino Primário</span><span class="en">Primary school</span><small>Externato Junica</small></li>
+                </ul>
+            </div>
+
+            <div>
+                <h3><span class="pt">O que sei fazer</span><span class="en">What I can do</span></h3>
+                <ul class="interesses">
+                    <li><span class="pt">Aprendo depressa e gosto de novas tecnologias</span><span class="en">I learn fast and like new technology</span></li>
+                    <li><span class="pt">Raciocínio lógico e resolução de problemas</span><span class="en">Logical thinking and problem solving</span></li>
+                    <li><span class="pt">Trabalho bem em equipa e comunico com facilidade</span><span class="en">I work well in a team and communicate easily</span></li>
+                    <li><span class="pt">Sou responsável e cumpro as minhas tarefas</span><span class="en">I am responsible and finish my tasks</span></li>
+                    <li><span class="pt">Proactivo, com vontade de crescer</span><span class="en">Proactive, and keen to grow</span></li>
+                </ul>
+            </div>
+
+            <div>
+                <h3><span class="pt">Línguas</span><span class="en">Languages</span></h3>
+                <ul class="interesses">
+                    <li><span class="pt">Português</span><span class="en">Portuguese</span><small><span class="pt">falado e escrito, com fluência</span><span class="en">spoken and written, fluent</span></small></li>
+                    <li><span class="pt">Inglês</span><span class="en">English</span><small><span class="pt">falado e escrito, com fluência</span><span class="en">spoken and written, fluent</span></small></li>
+                </ul>
+                <a class="cv-link" href="Daniel_Huhen_CV.docx" download><span class="pt">Descarregar o meu CV (.docx)</span><span class="en">Download my CV (.docx)</span></a>
+            </div>
+        </div>
+    </section>
+
+    <section id="projectos">
+        <h2><span class="pt">Projectos</span><span class="en">Projects</span></h2>
+
+        <p class="descricao">
+            <span class="pt">Trabalhos que fiz durante a formação. Nem tudo está perfeito,
+            mas cada um ensinou-me alguma coisa.</span><span class="en">Work I did during my course. Not everything is perfect,
+            but each one taught me something.</span>
+        </p>
+
+        <div class="projectos">
+
+            <article class="cartao">
+                <div class="imagem codigo">&lt;HTML&gt;</div>
+                <h3><span class="pt">Candidatura online</span><span class="en">Online application</span></h3>
+                <p>
+                    <span class="pt">Um formulário de candidatura com dados pessoais, endereço
+                    e login, feito só com HTML e CSS e dividido em blocos.</span><span class="en">An application form with personal details, address and login,
+                    made with just HTML and CSS and split into blocks (the form itself is in Portuguese).</span>
+                </p>
+                <a href="Trabalho.html"><span class="pt">Abrir o formulário</span><span class="en">Open the form</span></a>
+            </article>
+
+            <article class="cartao">
+                <div class="imagem access">ACCESS</div>
+                <h3><span class="pt">Base de dados de fornecedores e produtos</span><span class="en">Suppliers and products database</span></h3>
+                <p>
+                    <span class="pt">Duas tabelas, Fornecedor (nome e morada) e Produto
+                    (código, quantidade e data de registo), ligadas pelo
+                    código do fornecedor.</span><span class="en">Two tables, Supplier (name and address) and Product
+                    (code, quantity and registration date), linked by the
+                    supplier code.</span>
+                </p>
+                <a href="TSI-02_Daniel.accdb" download><span class="pt">Descarregar (.accdb)</span><span class="en">Download (.accdb)</span></a>
+            </article>
+
+            <article class="cartao">
+                <div class="imagem excel">EXCEL</div>
+                <h3><span class="pt">Pauta de resultados de três turmas</span><span class="en">Results sheet for three classes</span></h3>
+                <p>
+                    <span class="pt">Folha de cálculo com as notas das turmas TEI 51, 52 e 53,
+                    três trimestres com três somativas cada. As médias de cada
+                    trimestre e a média final saem de fórmulas.</span><span class="en">Spreadsheet with the grades of classes TEI 51, 52 and 53,
+                    three terms with three tests each. The average of each
+                    term and the final average come from formulas.</span>
+                </p>
+            </article>
+
+            <article class="cartao">
+                <div class="imagem rede">REDES</div>
+                <h3><span class="pt">Exercício 4: rede no Packet Tracer</span><span class="en">Exercise 4: network in Packet Tracer</span></h3>
+                <p>
+                    <span class="pt">Exercício de redes feito no Cisco Packet Tracer, para ver
+                    como os aparelhos de uma rede conversam entre si.</span><span class="en">Networking exercise done in Cisco Packet Tracer, to see how
+                    the devices on a network talk to each other.</span>
+                </p>
+                <a href="Exercio_4_Daniel_huhen.pkt" download><span class="pt">Descarregar (.pkt)</span><span class="en">Download (.pkt)</span></a>
+            </article>
+
+        </div>
+    </section>
+
+    <section id="contactos">
+        <h2><span class="pt">Contactos</span><span class="en">Contacts</span></h2>
+
+        <p><span class="pt">Queres falar comigo? Escreve ou liga.</span><span class="en">Want to talk? Write or call.</span></p>
+
+        <div class="contacto">
+            <p>
+                <strong>Email:</strong>
+                <a href="mailto:danielhuhendossantos@gmail.com">danielhuhendossantos@gmail.com</a>
+            </p>
+
+            <p>
+                <strong><span class="pt">Telefone:</span><span class="en">Phone:</span></strong>
+                <a href="tel:833279309">833 279 309</a>
+            </p>
+
+            <p>
+                <strong>Instagram:</strong>
+                <a href="https://www.instagram.com/danielhuhendos/"
+                   target="_blank" rel="noopener noreferrer">@danielhuhendos</a>
+            </p>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 Daniel Huhen dos Santos | <span class="pt">Portfólio pessoal</span><span class="en">Personal portfolio</span></p>
+        
+    </footer>
+
+</body>
+</html>
